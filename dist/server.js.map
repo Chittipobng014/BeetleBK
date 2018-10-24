@@ -1,1 +1,0 @@
-{"version":3,"sources":["../src/server.js"],"names":["require"],"mappings":";;AAAAA,QAAQ,gBAAR;AACAA,QAAQ,YAAR","file":"server.js","sourcesContent":["require('babel-register');\nrequire('./index.js');"]}
