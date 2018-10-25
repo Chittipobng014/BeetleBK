@@ -3,6 +3,6 @@ import db from '../api/queries'
 
 const router = express.Router();
 
-router.post('/getboxes', db.getboxes)
+router.post('/getallboxes', db.getallboxes)
 
 export default router

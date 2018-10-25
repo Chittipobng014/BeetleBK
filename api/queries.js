@@ -8,20 +8,16 @@ const connections = "postgres://clgfhgaukuolin:09efedd1bf282ea7dc4b9091b07f94155
 const db = pgp(connections)
 
 export default {
-    getboxes: async (req, res, next) => {
+    getallboxes: async (req, res, next) => {
         try {
-            const branchid = req.body.branchid
+            const branchid = req.body.branchid.toString()
             if (branchid == '' || branchid == null || branchid == undefined) {
                 const error = new Error("missing request body")
-                return res.sendStatus(400).json({
-                    error: error
-                })
+                return res.sendStatus(400)
             } else {
                 const boxes = await db.any(sql.getallboxes, [branchid])
                 res.status(200).json({
-                    response: {
-                        data: boxes
-                    }
+                    boxes: boxes
                 })   
             }
         } catch (error) {
@@ -35,7 +31,7 @@ export default {
             if (branchid == '' || branchid == null || branchid == undefined) {
                 res.sendStatus(400)
             } else {
-                const branch = await db.any(sql.getallbr, [branchid])
+                const branch = await db.any(sql.getallbranches, [branchid])
                 res.status(200).json({
                     response: {
                         data: branch
