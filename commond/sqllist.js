@@ -10,5 +10,6 @@ export default {
     updatecheckout: "UPDATE transactions SET checkout=$1 WHERE id=$2",
     gettransaction: "SELECT * FROM transactions WHERE id=$1",
     checkout: "DELETE FROM transactions WHERE id=$1",
-    savelog: "INSERT INTO events VALUES (DEFAULT, $1, $2, $3, $4, $5, $6, $7, $8, $9)"
+    savelog: "INSERT INTO events VALUES (DEFAULT, $1, $2, $3, $4, $5, $6, $7, $8, $9)",
+    
 }
