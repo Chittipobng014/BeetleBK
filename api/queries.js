@@ -1,6 +1,7 @@
 import sql from '../commond/sqllist'
 import promise from 'bluebird'
 import pg from 'pg-promise'
+import sqllist from '../commond/sqllist';
 
 const options = { promiseLib: promise }
 const pgp = pg(options)
@@ -41,6 +42,27 @@ export default {
         } catch (error) {
             console.log(error)
             return res.sendStatus(500)
+        }
+    },
+    renting: async (req, res, next) => {
+        try {
+            const boxid = req.body.boxid
+            const passcode = req.body.passcode
+            const faceid = req.body.faceid
+            const phonenumber = req.body.phonenumber
+            const branchid = req.body.branchid
+            const checkin = new Date()
+            if (boxid == '' || passcode == '' || faceid == '' || phonenumber == '' || branchid == '') {
+                res.sendStatus(400)
+            } else {
+                const renting = await db.none(sqllist.renting, [boxid, checkin, branchid, phonenumber, passcode, faceid])
+                const boxrented = await db.none(sqllist.boxrented, [boxid])
+                console.log(boxrented)
+                res.sendStatus(200)
+            }
+        } catch (error) {
+            console.log(error)
+            res.sendStatus(500)
         }
     }
 }
