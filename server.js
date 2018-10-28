@@ -14,7 +14,7 @@ logger.stream = {
         logger.info(message);
     }
 };
-
+  
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

@@ -11,12 +11,12 @@ const db = pgp(connections)
 export default {
     getallboxes: async (req, res, next) => {
         try {
-            const branchid = req.body.branchid.toString()
+            const branchid = req.body.branchid
             if (branchid == '' || branchid == null || branchid == undefined) {
                 const error = new Error("missing request body")
-                return res.sendStatus(400)
+                return res.sendStatus(400).end()
             } else {
-                const boxes = await db.any(sql.getallboxes, [branchid])
+                const boxes = await db.any(sql.getallboxes, [branchid.toString()])
                 res.status(200).json({
                     boxes: boxes
                 })   
