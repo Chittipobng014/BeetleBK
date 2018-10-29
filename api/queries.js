@@ -72,7 +72,7 @@ export default {
                 res.sendStatus(400).end()
             } else {
                 const faceid = await db.any(sqllist.getInuseFaceId, [branchid.toString()])
-                res.send(200).json({
+                res.status(200).json({
                     faceid
                 })
             }
