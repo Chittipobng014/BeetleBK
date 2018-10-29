@@ -12,5 +12,5 @@ export default {
     gettransaction: "SELECT * FROM transactions WHERE id=$1",
     checkout: "DELETE FROM transactions WHERE id=$1",
     savelog: "INSERT INTO events VALUES (DEFAULT, $1, $2, $3, $4, $5, $6, $7, $8, $9)",
-    getInuseFaceId: "SELECT faceid FROM transactions WHERE status='inuse' AND branchid=$1"
+    getInuseFaceId: "SELECT faceid, boxid FROM transactions WHERE status='inuse' AND branchid=$1"
 }
