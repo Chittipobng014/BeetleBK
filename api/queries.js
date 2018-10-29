@@ -71,9 +71,9 @@ export default {
             if (branchid == '' || branchid == null || branchid == undefined) {
                 res.sendStatus(400).end()
             } else {
-                const faceid = await db.any(sqllist.getInuseFaceId, [branchid.toString()])
+                const facesid = await db.any(sqllist.getInuseFaceId, [branchid.toString()])
                 res.status(200).json({
-                    faceid
+                    facesid
                 })
             }
         } catch (error) {
