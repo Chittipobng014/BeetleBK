@@ -6,11 +6,13 @@ export default {
     removebox: "DELETE FROM boxes WHERE id=$1",
     signin: "SELECT * FROM branches WHERE username=$1",
     branchregister: "INSERT INTO branches(id, name, username, password) VALUES (DEFAULT, $1, $2, $3)",
-    renting: "INSERT INTO transactions VALUES (DEFAULT, $1, $2, null, 'inuse', $3, $4, $5, $6)",
+    renting: "INSERT INTO transactions VALUES (DEFAULT, $1, $2, null, 'inuse', $3, $4, $5, $6, (SELECT price FROM boxes WHERE id=$7)) RETURNING *",
     boxrented: "UPDATE boxes SET status='inuse' WHERE id=$1",
     updatecheckout: "UPDATE transactions SET checkout=$1 WHERE id=$2",
     gettransaction: "SELECT * FROM transactions WHERE id=$1",
     checkout: "DELETE FROM transactions WHERE id=$1",
     savelog: "INSERT INTO events VALUES (DEFAULT, $1, $2, $3, $4, $5, $6, $7, $8, $9)",
-    getInuseFaceId: "SELECT faceid, boxid FROM transactions WHERE status='inuse' AND branchid=$1"
+    getInuseFaceId: "SELECT faceid, boxid, id FROM transactions WHERE status='inuse' AND branchid=$1",
+    checkout: "UPDATE transactions SET status='completed', checkout=$3 WHERE boxid=$2 AND id=$1",
+    boxrelease: "UPDATE boxes SET status='aviable' WHERE id=$1"
 }

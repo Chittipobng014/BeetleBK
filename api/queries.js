@@ -55,14 +55,34 @@ export default {
             if (boxid == '' || passcode == '' || faceid == '' || phonenumber == '' || branchid == '') {
                 res.sendStatus(400)
             } else {
-                const renting = await db.none(sqllist.renting, [boxid, checkin, branchid, phonenumber, passcode, faceid])
-                const boxrented = await db.none(sqllist.boxrented, [boxid])
+                const renting = await db.any(sqllist.renting, [boxid.toString(), checkin, branchid.toString(), phonenumber.toString(), passcode.toString(), faceid.toString(), boxid.toString()])
+                console.log(renting)
+                const boxrented = await db.none(sqllist.boxrented, [boxid.toString()])
                 console.log(boxrented)
                 res.sendStatus(200)
             }
         } catch (error) {
             console.log(error)
             res.sendStatus(500)
+        }
+    },
+    checkout: async (req, res, next) => {
+        try {
+            const boxid = req.body.boxid
+            const transactionid = req.body.transactionid
+            const checkouttime = new Date()
+            if (boxid == '' || boxid == null || boxid == undefined || transactionid == '' || transactionid == null || transactionid == undefined || checkout == '' || checkout == null || checkout == undefined) {
+                res.sendStatus(400).end()
+            } else {
+                const checkout = await db.none(sqllist.checkout, [transactionid.toString(), boxid.toString(), checkouttime])
+                const boxrelease = await db.none(sqllist.boxrelease, [boxid])
+                res.status(200).json({
+                    message: 'Success'
+                })
+            }
+        } catch (error) {
+            console.log(error)
+            res.sendStatus(500).end()
         }
     },
     getInuseFaceId: async (req, res, next) => {
