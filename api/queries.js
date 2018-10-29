@@ -23,7 +23,7 @@ export default {
             }
         } catch (error) {
             console.log(error)
-            return res.sendStatus(500)
+            return res.sendStatus(500).end()
         }
     },
     getbranches: async (req, res, next) => {
@@ -63,6 +63,22 @@ export default {
         } catch (error) {
             console.log(error)
             res.sendStatus(500)
+        }
+    },
+    getInuseFaceId: async (req, res, next) => {
+        try {
+            const branchid = req.body.branchid
+            if (branchid == '' || branchid == null || branchid == undefined) {
+                res.sendStatus(400).end()
+            } else {
+                const faceid = await db.any(sqllist.getInuseFaceId, [branchid.toString()])
+                res.send(200).json({
+                    faceid
+                })
+            }
+        } catch (error) {
+            console.log(error)
+            res.sendStatus(500).end()
         }
     }
 }
