@@ -3,9 +3,9 @@ import db from '../api/queries'
 
 const router = express.Router();
 
-router.post('/getallboxes', db.getallboxes)
-router.post('/renting', db.renting)
-router.post('/getinusefaceid', db.getInuseFaceId)
-router.post('/checkout', db.checkout)
+router.get('/getallboxes/:branchid', db.getallboxes)
+router.post('/transactions', db.renting)
+router.get('/transactions/:branchid', db.getInuseFaceId)
+router.put('/checkout/:transactionid', db.checkout)
 
 export default router

@@ -13,6 +13,6 @@ export default {
     checkout: "DELETE FROM transactions WHERE id=$1",
     savelog: "INSERT INTO events VALUES (DEFAULT, $1, $2, $3, $4, $5, $6, $7, $8, $9)",
     getInuseFaceId: "SELECT faceid, boxid, id FROM transactions WHERE status='inuse' AND branchid=$1",
-    checkout: "UPDATE transactions SET status='completed', checkout=$3 WHERE boxid=$2 AND id=$1",
+    checkout: "UPDATE transactions SET status='completed', checkout=$2 WHERE id=$1 RETURNING boxid",
     boxrelease: "UPDATE boxes SET status='aviable' WHERE id=$1"
 }
