@@ -106,6 +106,7 @@ export default {
                 res.sendStatus(400).end()
             } else {
                 const transaction = await db.any(sqllist.gettransactionbyid, [boxid])
+                console.log(transaction)
                 if (passcode != transaction[0].passcode) {
                     res.send(200).json({
                         result: true
