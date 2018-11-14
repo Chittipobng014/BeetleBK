@@ -105,14 +105,14 @@ export default {
             if (passcode == null || passcode == undefined || passcode == '' || boxid == null || boxid == undefined || boxid == '') {
                 res.sendStatus(400).end()
             } else {
-                const transaction = await db.any(sqllist.gettransactionbyid(), [boxid])
+                const transaction = await db.any(sqllist.gettransactionbyid, [boxid])
                 if (passcode != transaction[0].passcode) {
                     res.send(200).json({
-                        message: 'fail'
+                        result: true
                     })
                 } else {
                     res.send(200).json({
-                        message: 'success'
+                        result: true
                     })
                 }
             }
