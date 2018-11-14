@@ -102,19 +102,19 @@ export default {
         try {
             const passcode = req.body.passcode
             const boxid = req.body.boxid
+            let result = null
             if (passcode == null || passcode == undefined || passcode == '' || boxid == null || boxid == undefined || boxid == '') {
                 res.sendStatus(400).end()
             } else {
                 const transaction = await db.any(sqllist.gettransactionbyid, [boxid])
                 if (passcode.toString() != transaction[0].passcode) {
-                    res.send(200).json({
-                        result: false
-                    })
+                    result = false
                 } else {
-                    res.send(200).json({
-                        result: true
-                    })
+                    result = true
                 }
+                return res.status(200).json({
+                    result
+                })
             }
         } catch (error) {
             console.log(error)
