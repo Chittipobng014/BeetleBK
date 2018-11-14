@@ -6,6 +6,7 @@ const router = express.Router();
 router.get('/getallboxes/:branchid', db.getallboxes)
 router.post('/transactions', db.renting)
 router.get('/transactions/:branchid', db.getInuseFaceId)
-router.put('/checkout/:transactionid', db.checkout)
+router.put('/checkout/:transactionid', db.checkout),
+router.post('/passcode', db.passcodeVerify)
 
 export default router

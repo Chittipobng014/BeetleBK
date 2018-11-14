@@ -2,18 +2,8 @@ DROP TABLE IF EXISTS events;
 DROP TABLE IF EXISTS branches;
 DROP TABLE IF EXISTS boxes;
 DROP TABLE IF EXISTS transactions;
-
-CREATE TABLE events (
-    boxid TEXT NOT NULL,
-    transactionid int NOT NULL,
-    passcode TEXT NOT NULL,
-    faceid TEXT NOT NULL,
-    checkin TEXT NOT NULL,
-    checkout TEXT NOT NULL,
-    branchid int NOT NULL,
-    phonenumber TEXT NOT NULL,
-    price int NOT NULL
-);
+DROP TABLE IF EXISTS events;
+DROP TABLE IF EXISTS Aggregates;
 
 CREATE TABLE branches (
     id SERIAL PRIMARY KEY,
@@ -43,4 +33,18 @@ CREATE TABLE transactions (
     checkin timestamp with time zone NOT NULL,
     checkout timestamp with time zone,
     branchid TEXT NOT NULL
+);
+
+CREATE EXTENSION "uuid-ossp";
+
+CREATE TABLE Aggregates (
+    id uuid DEFAULT uuid_generate_v4 () PRIMARY KEY,
+    type text,
+    version int
+);
+
+CREATE TABLE Events (
+    id uuid REFERENCES Aggregates(id),
+    data json,
+    version int
 );

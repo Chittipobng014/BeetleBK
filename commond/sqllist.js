@@ -14,5 +14,6 @@ export default {
     savelog: "INSERT INTO events VALUES (DEFAULT, $1, $2, $3, $4, $5, $6, $7, $8, $9)",
     getInuseFaceId: "SELECT faceid, boxid, id FROM transactions WHERE status='inuse' AND branchid=$1",
     checkout: "UPDATE transactions SET status='completed', checkout=$2 WHERE id=$1 RETURNING boxid",
-    boxrelease: "UPDATE boxes SET status='aviable' WHERE id=$1"
+    boxrelease: "UPDATE boxes SET status='aviable' WHERE id=$1",
+    gettransactionbyid: "SELECT * FROM transactions WHERE boxid=$1 AND status='inuse'"
 }

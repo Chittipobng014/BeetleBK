@@ -97,5 +97,28 @@ export default {
             console.log(error)
             res.sendStatus(500).end()
         }
+    },
+    passcodeVerify: async (req, res, next) => {
+        try {
+            const passcode = req.body.passcode
+            const boxid = req.body.boxid
+            if (passcode == null || passcode == undefined || passcode == '' || boxid == null || boxid == undefined || boxid == '') {
+                res.sendStatus(400).end()
+            } else {
+                const transaction = await db.any(sqllist.gettransactionbyid(), [boxid])
+                if (passcode != transaction[0].passcode) {
+                    res.send(200).json({
+                        message: 'fail'
+                    })
+                } else {
+                    res.send(200).json({
+                        message: 'success'
+                    })
+                }
+            }
+        } catch (error) {
+            console.log(error)
+            res.sendStatus(500).end()
+        }
     }
 }
