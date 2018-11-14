@@ -107,11 +107,13 @@ export default {
             } else {
                 const transaction = await db.any(sqllist.gettransactionbyid, [boxid])
                 console.log(transaction)
-                if (passcode != transaction[0].passcode) {
+                if (passcode.toString() != transaction[0].passcode) {
+					console.log("​passcode", passcode)
                     res.send(200).json({
-                        result: true
+                        result: false
                     })
                 } else {
+                    console.log("​passcode else", passcode)
                     res.send(200).json({
                         result: true
                     })
