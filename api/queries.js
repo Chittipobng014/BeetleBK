@@ -109,12 +109,12 @@ export default {
                 console.log(transaction)
                 if (passcode.toString() != transaction[0].passcode) {
 					console.log("​passcode", passcode)
-                    res.send(200).json({
+                    res.sendStatus(200).json({
                         result: false
                     })
                 } else {
                     console.log("​passcode else", passcode)
-                    res.send(200).json({
+                    res.sendStatus(200).json({
                         result: true
                     })
                 }
