@@ -111,6 +111,7 @@ export default {
                     result = false
                 } else {
                     result = true
+                    await db.any(sql.checkout, [transaction[0].id, new Date()])
                 }
                 return res.status(200).json({
                     result
