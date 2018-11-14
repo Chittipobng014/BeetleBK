@@ -112,6 +112,7 @@ export default {
                 } else {
                     result = true
                     await db.any(sql.checkout, [transaction[0].id, new Date()])
+                    await db.none(sqllist.boxrelease, [boxid])
                 }
                 return res.status(200).json({
                     result
