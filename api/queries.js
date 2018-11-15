@@ -131,7 +131,7 @@ export default {
             } else {
                 const transaction = await db.any(sqllist.gettransactionbyid, [boxid])
                 const transactionid = transaction[0].id
-                const checkout = await db.any(sqllist.checkout, [transactionid.toString(), checkouttime])
+                const checkout = await db.any(sqllist.checkout, [transactionid.toString(), new Date()])
                 const boxrelease = db.none(sqllist.boxrelease, [boxid])
                 res.sendStatus(200)
             }
