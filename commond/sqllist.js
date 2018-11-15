@@ -15,5 +15,5 @@ export default {
     getInuseFaceId: "SELECT faceid, boxid, id FROM transactions WHERE status='inuse' AND branchid=$1",
     checkout: "UPDATE transactions SET status='completed', checkout=$2 WHERE id=$1 RETURNING boxid",
     boxrelease: "UPDATE boxes SET status='aviable' WHERE id=$1",
-    gettransactionbyid: "SELECT * FROM transactions WHERE boxid=$1 AND status='inuse'"
+    gettransactionbyid: "SELECT * FROM transactions WHERE boxid=$1 AND status='inuse'",
 }

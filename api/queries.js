@@ -122,5 +122,22 @@ export default {
             console.log(error)
             res.sendStatus(500).end()
         }
+    },
+    checkoutByBoxid: async (req, res, next) => {
+        try {
+            const boxid = req.params.boxid
+            if (boxid == null || boxid == undefined || boxid == '') {
+                res.sendStatus(400).end()
+            } else {
+                const transaction = await db.any(sqllist.gettransactionbyid, [boxid])
+                const transactionid = transaction[0].id
+                const checkout = await db.any(sqllist.checkout, [transactionid.toString(), checkouttime])
+                const boxrelease = db.none(sqllist.boxrelease, [boxid])
+                res.sendStatus(200)
+            }
+        } catch (error) {
+            console.log(error)
+            res.sendStatus(500).end()
+        }
     }
 }
