@@ -9,5 +9,6 @@ router.get('/transactions/:branchid', db.getInuseFaceId)
 router.put('/checkout/:transactionid', db.checkout),
 router.post('/passcode', db.passcodeVerify)
 router.put('/checkoutbyid/:boxid', db.checkoutByBoxid)
+router.get('/transactionsbyphone/:phonenumber', db.transactionByPhone)
 
 export default router

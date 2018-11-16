@@ -142,7 +142,7 @@ export default {
     },
     transactionByPhone: async (req, res, next) => {
         try {
-            const phonenumber = req.body.phonenumber
+            const phonenumber = req.params.phonenumber
             if (phonenumber == null || phonenumber == undefined || phonenumber == '') {
                 res.sendStatus(400).end()
             } else {
