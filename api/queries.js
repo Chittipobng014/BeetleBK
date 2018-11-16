@@ -18,7 +18,7 @@ export default {
                 const boxes = await db.any(sql.getallboxes, [branchid.toString()])
                 res.status(200).json({
                     boxes: boxes
-                })   
+                })
             }
         } catch (error) {
             console.log(error)
@@ -36,7 +36,7 @@ export default {
                     response: {
                         data: branch
                     }
-                })   
+                })
             }
         } catch (error) {
             console.log(error)
@@ -139,5 +139,22 @@ export default {
             console.log(error)
             res.sendStatus(500).end()
         }
+    },
+    transactionByPhone: async (req, res, next) => {
+        try {
+            const phonenumber = req.body.phonenumber
+            if (phonenumber == null || phonenumber == undefined || phonenumber == '') {
+                res.sendStatus(400).end()
+            } else {
+                const transactions = await db.any(sqllist.gettransactionbyphone, [phonenumber])
+                res.status(200).json({
+                    transactions
+                })
+            }
+        } catch (error) {
+            console.log(error)
+            res.sendStatus(500).end()
+        }
     }
+
 }

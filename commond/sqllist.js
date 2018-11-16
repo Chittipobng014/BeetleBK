@@ -16,4 +16,5 @@ export default {
     checkout: "UPDATE transactions SET status='completed', checkout=$2 WHERE id=$1 RETURNING boxid",
     boxrelease: "UPDATE boxes SET status='aviable' WHERE id=$1",
     gettransactionbyid: "SELECT * FROM transactions WHERE boxid=$1 AND status='inuse'",
+    gettransactionbyphone: "SELECT * FROM transactions WHERE phonenumber=$1 AND status='inuse'"
 }
