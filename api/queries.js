@@ -155,6 +155,21 @@ export default {
             console.log(error)
             res.sendStatus(500).end()
         }
+    },
+    updateBoxInfo: async (req,res,next) => {
+        try {
+            const boxid = req.params.id
+            const price = req.body.price
+            const size = req.body.size
+            await db.any(sqllist.updateBoxInfo [boxid, price, size])
+            res.status(200).send({
+                status: 200,
+                message: 'success'
+            })
+        } catch (error) {
+            console.log(error)
+            res.sendStatus(500).end()
+        }
     }
 
 }
