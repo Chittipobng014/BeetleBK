@@ -217,7 +217,7 @@ export default {
             res.sendStatus(500).end()
         }
     },
-    lockBox: async (req, res, next) => {
+    unlockBox: async (req, res, next) => {
         try {
             const boxid = req.params.id
             await db.any(sqllist.unlockBox, [boxid])
