@@ -207,7 +207,7 @@ export default {
     lockBox: async (req, res, next) => {
         try {
             const boxid = req.params.id
-            const transactionid = await db.any(sqllist.gettransactionbyid [boxid])
+            const transactionid = await db.any(sqllist.gettransactionbyid, [boxid])
             await db.any(sqllist.lockTransaction, [transactionid])
             await db.any(sqllist.lockBox, [boxid])
             res.status(200).send({
