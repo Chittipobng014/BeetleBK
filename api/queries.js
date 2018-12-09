@@ -208,7 +208,8 @@ export default {
         try {
             const boxid = req.params.id
 			console.log("​boxid", boxid)
-            const transactionid = await db.any(sqllist.gettransactionbyid, [boxid])
+            let transactionid = await db.any(sqllist.gettransactionbyid, [boxid])
+            transactionid = transactionid[0].id
 			console.log("​transactionid", transactionid)
             await db.any(sqllist.lockTransaction, [transactionid])
             await db.any(sqllist.lockBox, [boxid])
