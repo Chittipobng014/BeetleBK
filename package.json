@@ -61,5 +61,8 @@
     "env": {
       "mocha": true
     }
+  },
+  "engines": {
+    "node": "10.3.0"
   }
 }
