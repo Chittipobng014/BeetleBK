@@ -20,5 +20,5 @@ export default {
     updateBoxInfo: "UPDATE boxes SET price=$2, size=$3 WHERE id=$1",
     deleteBox: "DELETE FROM boxes WHERE id=$1",
     lockBox: "UPDATE status='lock' WHERE id=$1",
-    lockBox: "UPDATE status='aviable' WHERE id=$1"
+    unlockBox: "UPDATE status='aviable' WHERE id=$1"
 }
