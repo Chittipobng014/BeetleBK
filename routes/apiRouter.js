@@ -14,5 +14,6 @@ router.put('/boxes/:id', db.updateBoxInfo)
 router.delete('/boxes/:id', db.deleteBox)
 router.post('/boxes', db.addBox)
 router.put('/boxes/lock/:id', db.lockBox)
+router.put('/boxes/unlock/:id', db.unlockBox)
 
 export default router
