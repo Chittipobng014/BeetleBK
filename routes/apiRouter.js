@@ -11,5 +11,7 @@ router.post('/passcode', db.passcodeVerify)
 router.put('/checkoutbyid/:boxid', db.checkoutByBoxid)
 router.get('/transactionsbyphone/:phonenumber', db.transactionByPhone)
 router.put('/boxes/:id', db.updateBoxInfo)
+router.delete('/boxes/:id', db.deleteBox)
+router.post('/boxes', db.addBox)
 
 export default router

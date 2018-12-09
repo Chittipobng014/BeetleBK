@@ -156,12 +156,45 @@ export default {
             res.sendStatus(500).end()
         }
     },
-    updateBoxInfo: async (req,res,next) => {
+    updateBoxInfo: async (req, res, next) => {
         try {
             const boxid = req.params.id
             const price = req.body.price
             const size = req.body.size
-            await db.any(sqllist.updateBoxInfo [boxid, price, size])
+            await db.any(sqllist.updateBoxInfo, [boxid, price, size])
+            res.status(200).send({
+                status: 200,
+                message: 'success'
+            })
+        } catch (error) {
+            console.log(error)
+            res.sendStatus(500).end()
+        }
+    },
+    deleteBox: async (req, res, next) => {
+        try {
+            const boxid = req.params.id
+            await db.any(sqllist.deleteBox, [boxid])
+            res.status(200).send({
+                status: 200,
+                message: 'success'
+            })
+        } catch (error) {
+            console.log(error)
+            res.sendStatus(500).end()
+        }
+    },
+    addBox: async (req, res, next) => {
+        try {
+            const boxid = req.body.boxid
+            const name = req.body.name
+            const size = req.body.size
+            const price = req.body.price
+            const status = 'aviable'
+            const branchid = req.body.branchid
+            const masterkey = 1234
+            let box = await db.any(sqllist.addbox, [boxid, name, size, price, status, branchid, masterkey])
+            console.log(box)
             res.status(200).send({
                 status: 200,
                 message: 'success'
@@ -171,5 +204,4 @@ export default {
             res.sendStatus(500).end()
         }
     }
-
 }
