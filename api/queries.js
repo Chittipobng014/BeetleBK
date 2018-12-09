@@ -203,5 +203,18 @@ export default {
             console.log(error)
             res.sendStatus(500).end()
         }
-    }
+    },
+    lockBox: async (req, res, next) => {
+        try {
+            const boxid = req.params.id
+            await db.any(sqllist.lockBox, [boxid])
+            res.status(200).send({
+                status: 200,
+                message: 'success'
+            })
+        } catch (error) {
+            console.log(error)
+            res.sendStatus(500).end()
+        }
+    },
 }

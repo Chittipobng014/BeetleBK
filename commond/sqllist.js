@@ -19,4 +19,5 @@ export default {
     gettransactionbyphone: "SELECT * FROM transactions WHERE phonenumber=$1 AND status='inuse'",
     updateBoxInfo: "UPDATE boxes SET price=$2, size=$3 WHERE id=$1",
     deleteBox: "DELETE FROM boxes WHERE id=$1",
+    lockBox: "UPDATE status='lock' WHERE id=$1"
 }

@@ -13,5 +13,6 @@ router.get('/transactionsbyphone/:phonenumber', db.transactionByPhone)
 router.put('/boxes/:id', db.updateBoxInfo)
 router.delete('/boxes/:id', db.deleteBox)
 router.post('/boxes', db.addBox)
+router.put('/boxes/lock/:id', db.lockBox)
 
 export default router
