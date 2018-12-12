@@ -237,6 +237,7 @@ export default {
             const boxes = await db.any(sqllist.getboxbybranch, [id])
             const transactions = await db.any(sqllist.gettransactionbybranch, [id])
             const usage = await db.any(sqllist.usageDay, [id])
+            const total = await db.any(sqllist.totalIncomeBranch, [id])
             res.status(200).send({
                 status: 200,
                 message: 'success',
@@ -244,7 +245,8 @@ export default {
                     branch,
                     boxes,
                     transactions,
-                    usage
+                    usage,
+                    total
                 }
             })
         } catch (error) {
@@ -283,10 +285,16 @@ export default {
         try {
             const id = req.params.id
             const details = await db.any(sqllist.transactionsByBoxid, [id])
+            const total = await db.any(sqllist.totalIncome, [id])
+            const usage = await db.any(sqllist.usageDayBox, [id])
             res.status(200).send({
                 status: 200,
                 message: 'success',
-                data: details
+                data: {
+                    details,
+                    total,
+                    usage
+                }
             })
         } catch (error) {
             console.log(error)

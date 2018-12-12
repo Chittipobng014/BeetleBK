@@ -28,5 +28,8 @@ export default {
     gettransactionbybranch: "SELECT * FROM transactions WHERE branchid=$1",
     transactions: "SELECT t.*, b.name, ba.name AS branch FROM boxes b INNER JOIN transactions t ON t.boxid=b.id INNER JOIN branches ba ON CAST(t.branchid as INT)=ba.id",
     usageDay: "SELECT checkin::date, COUNT(*) as TotalRows FROM transactions WHERE branchid=$1 GROUP BY checkin::date",
-    transactionsByBoxid: "SELECT t.*, b.name, ba.name AS branch FROM boxes b INNER JOIN transactions t ON t.boxid=b.id INNER JOIN branches ba ON CAST(t.branchid as INT)=ba.id WHERE b.id=$1",
+    transactionsByBoxid: "SELECT t.*, b.name, b.name AS boxname, b.status AS boxstatus, b.price AS boxprice, ba.name AS branch FROM boxes b INNER JOIN transactions t ON t.boxid=b.id INNER JOIN branches ba ON CAST(t.branchid as INT)=ba.id WHERE b.id=$1",
+    totalIncome: "SELECT sum(price) FROM transactions WHERE boxid=$1",
+    usageDayBox: "SELECT checkin::date, COUNT(*) as TotalRows FROM transactions WHERE boxid=$1 GROUP BY checkin::date",
+    totalIncomeBranch: "SELECT sum(t.price) FROM transactions t INNER JOIN boxes b ON t.boxid=b.id INNER JOIN branches ba ON b.branchid=ba.id WHERE ba.id=$1",
 }

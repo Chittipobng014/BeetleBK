@@ -7,8 +7,7 @@ import config from './core/config/config.dev';
 import apiRouter from './routes/apiRouter';
 
 const app = express();
-//const port = config.serverPort;
-const port = 3000
+const port = config.serverPort;
 
 logger.stream = {
     write: (message, encoding) => {
