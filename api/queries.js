@@ -25,24 +25,6 @@ export default {
             return res.sendStatus(500).end()
         }
     },
-    getbranches: async (req, res, next) => {
-        try {
-            const branchid = req.body.branchid
-            if (branchid == '' || branchid == null || branchid == undefined) {
-                res.sendStatus(400)
-            } else {
-                const branch = await db.any(sql.getallbranches, [branchid])
-                res.status(200).json({
-                    response: {
-                        data: branch
-                    }
-                })
-            }
-        } catch (error) {
-            console.log(error)
-            return res.sendStatus(500)
-        }
-    },
     renting: async (req, res, next) => {
         try {
             const boxid = req.body.boxid
@@ -235,4 +217,66 @@ export default {
             res.sendStatus(500).end()
         }
     },
+    getBranches: async (req, res, next) => {
+        try {
+            const branches = await db.any(sqllist.allbranches)
+            res.status(200).send({
+                status: 200,
+                message: 'success',
+                data: branches
+            })
+        } catch (error) {
+            console.log(error)
+            res.sendStatus(500).end()
+        }
+    },
+    branchDetail: async (req, res, next) => {
+        try {
+            const id = req.params.id
+            const branch = await db.any(sqllist.branchbyid, [id])
+            const boxes = await db.any(sqllist.getboxbybranch, [id])
+            const transactions = await db.any(sqllist.gettransactionbybranch, [id])
+            const usage = await db.any(sqllist.usageDay, [id])
+            res.status(200).send({
+                status: 200,
+                message: 'success',
+                data: {
+                    branch,
+                    boxes,
+                    transactions,
+                    usage
+                }
+            })
+        } catch (error) {
+            console.log(error)
+            res.sendStatus(500).end()
+        }
+    },
+    transactions: async (req, res, next) => {
+        try {
+            const transactions = await db.any(sqllist.transactions)
+            res.status(200).send({
+                status: 200,
+                message: 'success',
+                data: transactions
+            })
+        } catch (error) {
+            console.log(error)
+            res.sendStatus(500).end()
+        }
+    },
+    branchUsage: async (req, res, next) => {
+        try {
+            const id = req.params.id
+            const usage = await db.any(sqllist.usageDay, [id])
+            res.status(200).send({
+                status: 200,
+                message: 'success',
+                data: usage
+            })
+        } catch (error) {
+            console.log(error)
+            res.sendStatus(500).end()
+        }
+    }
 }

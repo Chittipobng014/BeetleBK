@@ -21,5 +21,11 @@ export default {
     deleteBox: "DELETE FROM boxes WHERE id=$1",
     lockBox: "UPDATE boxes SET status='lock' WHERE id=$1",
     lockTransaction: "UPDATE transactions SET status='lock' WHERE id=$1",
-    unlockBox: "UPDATE boxes SET status='aviable' WHERE id=$1"
+    unlockBox: "UPDATE boxes SET status='aviable' WHERE id=$1",
+    allbranches: "SELECT * FROM branches",
+    branchbyid: "SELECT * FROM branches WHERE id=$1",
+    getboxbybranch: "SELECT * FROM boxes WHERE branchid=$1",
+    gettransactionbybranch: "SELECT * FROM transactions WHERE branchid=$1",
+    transactions: "SELECT t.*, b.name, ba.name AS branch FROM boxes b INNER JOIN transactions t ON t.boxid=b.id INNER JOIN branches ba ON CAST(t.branchid as INT)=ba.id",
+    usageDay: "SELECT checkin::date, COUNT(*) as TotalRows FROM transactions WHERE branchid=$1 GROUP BY checkin::date"
 }
