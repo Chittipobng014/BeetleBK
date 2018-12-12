@@ -278,5 +278,19 @@ export default {
             console.log(error)
             res.sendStatus(500).end()
         }
+    },
+    boxDetails: async (req, res, next) => {
+        try {
+            const id = req.params.id
+            const details = await db.any(sqllist.transactionsByBoxid, [id])
+            res.status(200).send({
+                status: 200,
+                message: 'success',
+                data: details
+            })
+        } catch (error) {
+            console.log(error)
+            res.sendStatus(500).end()
+        }
     }
 }

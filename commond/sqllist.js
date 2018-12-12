@@ -27,5 +27,6 @@ export default {
     getboxbybranch: "SELECT * FROM boxes WHERE branchid=$1",
     gettransactionbybranch: "SELECT * FROM transactions WHERE branchid=$1",
     transactions: "SELECT t.*, b.name, ba.name AS branch FROM boxes b INNER JOIN transactions t ON t.boxid=b.id INNER JOIN branches ba ON CAST(t.branchid as INT)=ba.id",
-    usageDay: "SELECT checkin::date, COUNT(*) as TotalRows FROM transactions WHERE branchid=$1 GROUP BY checkin::date"
+    usageDay: "SELECT checkin::date, COUNT(*) as TotalRows FROM transactions WHERE branchid=$1 GROUP BY checkin::date",
+    transactionsByBoxid: "SELECT t.*, b.name, ba.name AS branch FROM boxes b INNER JOIN transactions t ON t.boxid=b.id INNER JOIN branches ba ON CAST(t.branchid as INT)=ba.id WHERE b.id=$1",
 }

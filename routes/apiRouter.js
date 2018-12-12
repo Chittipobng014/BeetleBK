@@ -19,5 +19,6 @@ router.get('/branch', db.getBranches)
 router.get('/branch/:id', db.branchDetail)
 router.get('/transactions', db.transactions)
 router.get('/transactions/usage/:id', db.branchUsage)
+router.get('/boxes/:id', db.boxDetails)
 
 export default router
